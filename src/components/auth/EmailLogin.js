@@ -25,7 +25,7 @@ const EmailLogin = ({ currentUser, setCurrentUser }) => {
         // let data = { "email": user.email }
         const response = await axios.post(
           "http://localhost:7070/api/auth/loginUserWithEmail",
-          currentUser,
+          result.user,
           { withCredentials: true }
         );
         console.log(response);

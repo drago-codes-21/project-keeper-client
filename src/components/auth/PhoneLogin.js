@@ -59,12 +59,12 @@ const PhoneLogin = ({ setCurrentUser, currentUser }) => {
         // User signed in successfully.
         // const user = result.user;
         setCurrentUser(result.user);
-        console.log("got user", currentUser);
+        console.log("got user", result.user);
         // setCookie("userToken", user.accessToken, {
         //     path: "/"
         // });
 
-        let data = { phoneNumber: currentUser.phoneNumber };
+        let data = { phoneNumber: result.user.phoneNumber };
         const response = await axios.post(
           "http://localhost:7070/api/auth/loginUserWithPhoneNum",
           data,
