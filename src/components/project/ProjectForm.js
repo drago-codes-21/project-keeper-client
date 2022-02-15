@@ -18,10 +18,21 @@ const ProjectForm = ({
   const [description, setDescription] = useState("");
   const [catagory, setCatagory] = useState("");
   const [price, setPrice] = useState(0);
+  const [imageUrl, setImageUrl] = useState("");
   const [postData, setPostData] = useState(null);
+  const [Id, setId] = useState("");
 
+  // const [proj, setProj] = useState("");
   const server = "http://localhost:7070/api/project/new";
   const server2 = "http://localhost:7070/api/project/all/projects";
+
+  // const addToFavourites = async (e) => {
+  //   e.preventDefault();
+  //   const response = await axios.get(
+  //     `http://localhost:7070/api/project/${postData._id}`
+  //   );
+  //   console.log(response);
+  // };
 
   const getAllProductsHandler = async (e) => {
     e.preventDefault();
@@ -29,18 +40,19 @@ const ProjectForm = ({
     const data = response.data;
     console.log(data);
     setPostData(data);
-    getAllProjects({ ...data });
+    setImageUrl(data.imageUrl);
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
     const response = await axios.post(
       server,
       JSON.stringify({
-        userId: currentUser._id,
+        userId: Id,
         title,
         catagory,
         price,
         description,
+        imageUrl,
       }),
       {
         headers: { "Content-Type": "application/json" },
@@ -51,140 +63,106 @@ const ProjectForm = ({
     if (response.statusText === "OK") {
       addNewProject(data);
     }
-    // console.log(data._id);
-    // getProduct(data._id);
   };
   useEffect(() => {
     addNewProject();
   }, [addNewProject]);
   useEffect(() => {
-    if (currentUser) {
-      console.log("post render with user");
+    if (currentUser._id) {
+      setId(currentUser._id);
     } else {
-      console.log("without user");
+      setId(currentUser.accessToken);
+      console.log(currentUser.accessToken);
     }
   }, [currentUser]);
   useEffect(() => {
     getAllProjects(projectData);
   }, [projectData, getAllProjects]);
+  useEffect(() => {}, []);
   return (
-    <form onSubmit={handleSubmit}>
-      <div className="container">
-        <div className="form-group">
-          <label>Title</label>
-          <input
-            placeholder="Title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            type="text"
-            className="form-control"
-          />
-        </div>
-        <div className="form-group">
-          <label>Description</label>
-          <input
-            placeholder="Add some description"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            type="text"
-            className="form-control"
-          />
-        </div>
-        <div className="form-group">
-          <label>Catagory</label>
-          <input
-            placeholder="Mention project's catagory"
-            value={catagory}
-            onChange={(e) => setCatagory(e.target.value)}
-            type="text"
-            className="form-control"
-          />
-        </div>
-        <div className="form-group">
-          <label>Price</label>
-          <input
-            placeholder="Price in $"
-            value={price}
-            onChange={(e) => setPrice(e.target.value)}
-            type="text"
-            className="form-control"
-          />
-        </div>
-        {/* <div className="form-group">
-          <label>Image Url</label>
-          <input
-            placeholder=""
-            value={image}
-            onChange={(e) => setImage(e.target.value)}
-            type="url"
-            className="form-control"
-          /> */}
-        {/* </div> */}
-        <button
-          type="submit"
-          className="btn btn-primary"
-          onClick={() => addNewProject(newProject)}
-        >
-          Submit
-        </button>
-        {/* <ProjectCard project={newProject} /> */}
+    <div className="ui container">
+      <form onSubmit={handleSubmit}>
+        <div className="ui form">
+          <div className="form-group">
+            <label className="ui pointing blue basic label">Title</label>
+            <input
+              placeholder="Title"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              type="text"
+              className="form-control"
+            />
+          </div>
+          <div className="form-group">
+            <label className="ui pointing blue basic label">Description</label>
+            <input
+              placeholder="Add some description"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              type="text"
+              className="form-control"
+            />
+          </div>
+          <div className="form-group">
+            <label className="ui pointing blue basic label">Catagory</label>
+            <input
+              placeholder="Mention project's catagory"
+              value={catagory}
+              onChange={(e) => setCatagory(e.target.value)}
+              type="text"
+              className="form-control"
+            />
+          </div>
+          <div className="form-group">
+            <label className="ui pointing blue basic label">Price</label>
+            <input
+              placeholder="Price in $"
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
+              type="text"
+              className="form-control"
+            />
+          </div>
+          <div className="form-group">
+            <label className="ui pointing blue basic label">Image url</label>
+            <input
+              placeholder="put image link"
+              value={imageUrl}
+              type="text"
+              className="form-control"
+              onChange={(e) => setImageUrl(e.target.value)}
+            />
+          </div>
+          <button
+            type="submit"
+            className="ui blue button"
+            onClick={() => addNewProject(newProject)}
+          >
+            Submit
+          </button>
+          <button className="ui red button " onClick={getAllProductsHandler}>
+            Get All Public Projects
+          </button>
 
-        <button className="btn btn-danger" onClick={getAllProductsHandler}>
-          Get Product
-        </button>
-        {/* {postData.map((item) => {
-          return <div>{item.price}</div>;
-        })} */}
-        {/* {<ProjectCard postData={postData} />} */}
-        {/* {postData.map((item) => {
-          return <ProjectCard item={item} />;
-        })} */}
-        {/* {postData.map((item) => (
-            <div>{item.price}</div>
-          ))} */}
-        {/* // <ProjectCard item={item} /> */}
-        {/* {postData ? (
-          postData.map((item) => {
-            return <div key={item._id}>{item.title}</div>;
-          })
-        ) : (
-          <div>Sorry</div>
-        )} */}
-
-        {/* {projectData ? (
-          projectData.map((item) => {
-            return (
-              <ProjectCard
-                key={item._id}
-                title={item.title}
-                description={item.description}
-                price={item.price}
-                catagory={item.catagory}
-              />
-            );
-          })
-        ) : (
-          <div>Sorryyyy</div>
-        )} */}
-        {/* {console.log(projectData)} */}
-
-        {currentUser && postData ? (
-          postData.map((item) => {
-            return (
-              <ProjectCard
-                key={item._id}
-                title={item.title}
-                description={item.description}
-                price={item.price}
-                catagory={item.catagory}
-              />
-            );
-          })
-        ) : (
-          <div>Sorryyyy</div>
-        )}
-      </div>
-    </form>
+          <div className="ui link cards">
+            {currentUser && postData
+              ? postData.map((item) => {
+                  return (
+                    <ProjectCard
+                      key={item._id}
+                      title={item.title}
+                      description={item.description}
+                      price={item.price}
+                      catagory={item.catagory}
+                      imageUrl={imageUrl}
+                    />
+                  );
+                })
+              : null}
+          </div>
+        </div>
+      </form>
+    </div>
   );
 };
 
@@ -196,7 +174,6 @@ const mapStateToProps = ({ project, user, data }) => ({
 const mapDispatchToProps = (dispatch) => ({
   addNewProject: (project) => dispatch(addNewProject(project)),
   getAllProjects: (data) => dispatch(getAllProjects(data)),
-  // getUserProjects: (project) => dispatch(getUserProjects(project)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProjectForm);

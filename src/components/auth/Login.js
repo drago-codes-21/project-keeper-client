@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { connect } from "react-redux";
 import { setCurrentUser } from "../../redux/user/user.actions";
@@ -25,48 +25,59 @@ const Login = ({ currentUser, setCurrentUser }) => {
     }
   };
 
-  useEffect(() => {
-    if (currentUser) {
-      console.log(currentUser._id);
-    } else {
-      console.log("err");
-    }
-  }, [currentUser]);
+  // useEffect(() => {
+  //   if (currentUser) {
+  //     console.log(currentUser._id);
+  //   } else {
+  //     console.log("err");
+  //   }
+  // }, [currentUser]);
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Login</h2>
-      <div className="options">
-        <div className="form-group">
-          <label>Email address</label>
-          <input
-            placeholder="Email"
-            className="form-control"
-            value={email}
-            type="email"
-            onChange={(e) => setEmail(e.target.value)}
-          />
+    <div className="ui container segments">
+      <form onSubmit={handleSubmit}>
+        <h2 className="ui header">Login</h2>
+        <div className="ui form">
+          <div className="ui feild">
+            <label className="ui pointing blue basic label">Email :</label>
+            <input
+              placeholder="Email"
+              className="form-control"
+              value={email}
+              type="email"
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+          <div class="ui divider"></div>
+          <div className="feild">
+            <label className={"ui pointing blue basic label"}>Password :</label>
+            {password.length > 0 && password.length < 6 ? (
+              <div className={"ui right pointing red basic label"}>
+                Your password must be 6 characters or more
+              </div>
+            ) : null}
+            <input
+              className="form-control"
+              placeholder="Password"
+              value={password}
+              type="password"
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <div class="ui divider"></div>
+            <button
+              type="submit"
+              className={`${
+                email && password ? "ui blue button" : "ui blue disabled button"
+              } `}
+              onClick={handleSubmit}
+            >
+              Login
+            </button>
+          </div>
+          {/* {currentUser ? <div>yess</div> : <div>Nooo</div>} */}
         </div>
-        <div className="form-group">
-          <label>Password</label>
-          <input
-            className="form-control"
-            placeholder="Password"
-            value={password}
-            type="password"
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <button
-            type="submit"
-            className="btn btn-primary"
-            onClick={handleSubmit}
-          >
-            Login
-          </button>
-        </div>
-        {currentUser ? <div>yess</div> : <div>Nooo</div>}
-      </div>
-    </form>
+      </form>
+    </div>
   );
 };
 

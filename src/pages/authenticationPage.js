@@ -1,20 +1,26 @@
 import React from "react";
-import EmailLogin from "../components/auth/EmailLogin";
+import GoogleLogin from "../components/auth/GoogleLogin";
 import Login from "../components/auth/Login";
-import Register from "../components/auth/Register";
-import PhoneLogin from "../components/auth/PhoneLogin";
-
-const AuthenticationPage = () => {
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import { AiFillPhone } from "react-icons/ai";
+const AuthenticationPage = ({ currentUser }) => {
   return (
     <div className="container">
-      <div className="authPage">
-        <Login />
-        <Register />
+      <Login />
+      <div className="buttons">
+        <GoogleLogin />
+        <Link to="/phoneLogin">
+          <button className="ui red goodle button" type="button">
+            <AiFillPhone className="ui large icon" />
+            PhoneLogin
+          </button>
+        </Link>
       </div>
-      <EmailLogin />
-      <PhoneLogin />
     </div>
   );
 };
-
-export default AuthenticationPage;
+const mapStateToProps = ({ user }) => ({
+  currentUser: user.currentUser,
+});
+export default connect(mapStateToProps)(AuthenticationPage);

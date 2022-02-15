@@ -81,51 +81,58 @@ const PhoneLogin = ({ setCurrentUser, currentUser }) => {
   };
 
   return (
-    <div className="container">
-      <div className="mb-3">
-        <label htmlFor="phoneNum" className="form-label">
-          Phone num
-        </label>
-        <input
-          type="text"
-          className="form-control"
-          id="phoneNum"
-          aria-describedby="emailHelp"
-          value={num}
-          onChange={(e) => {
-            setnum(e.target.value);
-          }}
-        />
-        <div id="phonerHelp" className="form-text">
-          We'll never share your number with anyone else.
+    <div className="ui container segments">
+      <div className="ui form">
+        <div className="ui feild">
+          <label htmlFor="phoneNum" className="ui pointing blue basic label">
+            Phone num
+          </label>
+          <input
+            type="text"
+            className="form-control"
+            id="phoneNum"
+            aria-describedby="emailHelp"
+            value={num}
+            placeholder="Phone Number"
+            onChange={(e) => {
+              setnum(e.target.value);
+            }}
+          />
+          <div id="phonerHelp" className="form-text">
+            We'll never share your number with anyone else.
+          </div>
         </div>
-      </div>
-      <div className="btn btn-primary" onClick={() => phonelog()}>
-        Submit
-      </div>
+        <div className="ui blue button" onClick={() => phonelog()}>
+          Submit
+        </div>
 
-      <div id="recaptcha-container"></div>
-      <div className="mb-3">
-        <label htmlFor="confirmation" className="form-label">
-          confirmation code
-        </label>
-        <input
-          type="number"
-          className="form-control"
-          id="confirmation"
-          value={confirmation}
-          onChange={(e) => {
-            setconfirmation(e.target.value);
-          }}
-          aria-describedby="emailHelp"
-        />
-      </div>
-      <div className="btn btn-primary" onClick={() => ValidateOtp()}>
-        confirmation
-      </div>
+        <div id="recaptcha-container"></div>
+        <div className="mb-3">
+          <label
+            htmlFor="confirmation"
+            className="ui pointing blue basic label"
+          >
+            confirmation code
+          </label>
+          <input
+            type="number"
+            className="form-control"
+            id="confirmation"
+            placeholder="Otp code"
+            value={confirmation}
+            onChange={(e) => {
+              setconfirmation(e.target.value);
+            }}
+            aria-describedby="emailHelp"
+          />
+        </div>
+        <div className="ui blue button" onClick={() => ValidateOtp()}>
+          confirmation
+        </div>
 
-      <div className="btn btn-danger" onClick={() => checkCookies()}>
-        Check cookies
+        <div className="ui red button" onClick={() => checkCookies()}>
+          Check cookies
+        </div>
       </div>
     </div>
   );

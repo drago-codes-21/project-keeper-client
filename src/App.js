@@ -1,47 +1,46 @@
 import Header from "./components/header/Header";
-import { Routes, Route } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { useCookies } from "react-cookie";
-
-// import Login from "./components/auth/Login";
-// import Register from "./components/auth/Register";
-import ProjectForm from "./components/project/ProjectForm";
-// import PhoneLogin from "./components/auth/PhoneLogin";
-// import EmailLogin from "./components/auth/EmailLogin";
+import { Routes, Route, Navigate } from "react-router-dom";
+// import { useEffect, useState } from "react";
+// import { useCookies } from "react-cookie";
 import UserProfile from "./components/project/UserProfile";
 import { connect } from "react-redux";
 import AuthenticationPage from "./pages/authenticationPage";
 import HomePage from "./pages/homePage";
+import ProjectPage from "./pages/projectPage";
+// import Register from "./components/auth/Register";
+import SavedProjectsPage from "./pages/savedProjectsPage";
+import PhoneLogin from "./components/auth/PhoneLogin";
+import Register from "./components/auth/Register";
 
 const App = ({ currentUser }) => {
-  const [cookies, setCookie] = useCookies(["userToken"]);
-  const [isUserSigned, setisUserSigned] = useState(false);
+  // const [cookies, setCookie] = useCookies(["userToken"]);
+  // const [isUserSigned, setisUserSigned] = useState(false);
 
-  useEffect(() => {
-    const fun = () => {
-      if (cookies.userToken && cookies.userToken !== "") {
-        console.log("cookies", cookies);
-        setisUserSigned(true);
-      }
-    };
+  // useEffect(() => {
+  //   const fun = () => {
+  //     if (cookies.userToken && cookies.userToken !== "") {
+  //       console.log("cookies", cookies);
+  //       setisUserSigned(true);
+  //     }
+  //   };
 
-    fun();
-  }, [cookies]);
+  //   fun();
+  // }, [cookies]);
 
   return (
     <>
       <Header />
       <Routes>
-        {/*currentUser && <Route path="/userDetail" element={<UserProfile />} />}
-        {!currentUser && <Route path="/login" element={<Login />} />}
-        {!currentUser && <Route path="/register" element={<Register />} />}
-        
-        <Route path="/phoneLogin" element={<PhoneLogin />} />
-      {!currentUser && <Route path="/emailLogin" element={<EmailLogin />} />} */}
         <Route path="/" element={<HomePage />} />
-        <Route path="/projects" element={<ProjectForm />} />
+        <Route path="/projects" element={<ProjectPage />} />
         <Route path="/userDetail" element={<UserProfile />} />
-        <Route path="/auth" element={<AuthenticationPage />} />
+        <Route
+          path="/auth"
+          element={currentUser ? <Navigate to="/" /> : <AuthenticationPage />}
+        />
+        <Route path="/saved" element={<SavedProjectsPage />} />
+        <Route path="/phoneLogin" element={<PhoneLogin />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
     </>
   );

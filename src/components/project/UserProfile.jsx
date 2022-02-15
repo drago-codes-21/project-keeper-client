@@ -2,14 +2,14 @@ import { connect } from "react-redux";
 import "./project.css";
 const UserProfile = ({ currentUser }) => {
   return (
-    <div className="col-md-4 animated fadeIn box">
+    <div>
       {currentUser ? (
-        <div className="card">
+        <div className=" box">
           <div className="card-body">
             <div className="avatar">
               <img
                 //   src={"https://i.ibb.co/ZYW3VTp/brown-brim.png"}
-                src={currentUser.photoURL}
+                src={currentUser.imageUrl}
                 className="card-img-top"
                 alt=""
               />

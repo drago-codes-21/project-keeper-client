@@ -1,11 +1,12 @@
-import React, { useState } from "react";
-import { authentication } from "../../firebase.js";
+import React from "react";
+// import { authentication } from "../../firebase.js";
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import axios from "axios";
 import { useCookies } from "react-cookie";
 import { setCurrentUser } from "../../redux/user/user.actions";
 import { connect } from "react-redux";
-const EmailLogin = ({ currentUser, setCurrentUser }) => {
+import { FcGoogle } from "react-icons/fc";
+const GoogleLogin = ({ currentUser, setCurrentUser }) => {
   const [cookies, setCookie] = useCookies(["userToken"]);
 
   const Login = () => {
@@ -47,7 +48,8 @@ const EmailLogin = ({ currentUser, setCurrentUser }) => {
   };
   return (
     <div>
-      <div className="btn btn-primary" onClick={() => Login()}>
+      <div className="ui blue goodle button" onClick={() => Login()}>
+        <i className="google icon" />
         Sign in with google
       </div>
     </div>
@@ -59,4 +61,4 @@ const mapStateToProps = ({ user }) => ({
 const mapDispatchToProps = (dispatch) => ({
   setCurrentUser: (user) => dispatch(setCurrentUser(user)),
 });
-export default connect(mapStateToProps, mapDispatchToProps)(EmailLogin);
+export default connect(mapStateToProps, mapDispatchToProps)(GoogleLogin);
