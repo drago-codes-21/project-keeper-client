@@ -10,20 +10,24 @@ const Header = ({ currentUser }) => {
       </Link>
 
       {currentUser ? (
-        <Link to="/projects" className="item">
-          Projects
-        </Link>
+        <>
+          <Link to="/projects" className="item">
+            Projects
+          </Link>
+          <div className="ms-auto">
+            <Dropdown />
+          </div>
+        </>
       ) : (
         <>
-          <Link className="item" to="/auth">
+          {/* <Link className="item" to="/auth">
             Login
-          </Link>{" "}
+          </Link>{" "} */}
           <Link className="item" to="/register">
             Register
           </Link>
         </>
       )}
-      <Dropdown />
     </div>
   );
 };

@@ -1,6 +1,7 @@
 import { connect } from "react-redux";
 import "./project.css";
 const UserProfile = ({ currentUser }) => {
+  console.log(currentUser);
   return (
     <div>
       {currentUser ? (
@@ -9,7 +10,7 @@ const UserProfile = ({ currentUser }) => {
             <div className="avatar">
               <img
                 //   src={"https://i.ibb.co/ZYW3VTp/brown-brim.png"}
-                src={currentUser.imageUrl}
+                src={currentUser.photoURL}
                 className="card-img-top"
                 alt=""
               />

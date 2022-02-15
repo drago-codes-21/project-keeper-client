@@ -38,9 +38,11 @@ const ProjectForm = ({
     e.preventDefault();
     const response = await axios.get(server2);
     const data = response.data;
-    console.log(data);
+    // console.log(data);
     setPostData(data);
-    setImageUrl(data.imageUrl);
+    // const { item } = { ...data };
+    // setImageUrl(data.imageUrl);
+    data.map((item) => {});
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -64,9 +66,9 @@ const ProjectForm = ({
       addNewProject(data);
     }
   };
-  useEffect(() => {
-    addNewProject();
-  }, [addNewProject]);
+  // useEffect(() => {
+  //   addNewProject();
+  // }, [addNewProject]);
   useEffect(() => {
     if (currentUser._id) {
       setId(currentUser._id);
@@ -78,7 +80,7 @@ const ProjectForm = ({
   useEffect(() => {
     getAllProjects(projectData);
   }, [projectData, getAllProjects]);
-  useEffect(() => {}, []);
+
   return (
     <div className="ui container">
       <form onSubmit={handleSubmit}>
@@ -154,7 +156,7 @@ const ProjectForm = ({
                       description={item.description}
                       price={item.price}
                       catagory={item.catagory}
-                      imageUrl={imageUrl}
+                      imageUrl={item.imageUrl}
                     />
                   );
                 })

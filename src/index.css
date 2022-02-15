@@ -8,7 +8,16 @@
 }
 body {
   background: linear-gradient(89deg, #ff5edf 0%, #04c8de 100%);
+  font-family: "Courier New", Courier, monospace;
 }
 .boxing {
   border: 2px solid black;
+}
+.wrapper {
+  display: grid;
+  grid-template-columns: 33% 33% 33%;
+  grid-gap: 10px;
+}
+.imgbox {
+  width: 100%;
 }

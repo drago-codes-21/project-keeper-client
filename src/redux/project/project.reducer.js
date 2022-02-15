@@ -12,25 +12,6 @@ const INITIAL_STATE = {
   savedCollection: [],
 };
 
-// const server = "http://localhost:7070/api/project";
-// const addToFavourites=async(e)=>{
-//   // let pokemonFromFavourite = state.favourites.find(
-//   //   (favPokemon) => pokemon.id === favPokemon.id
-//   //   );
-//       e.preventDefault()
-//   const response = await axios.get("http://localhost:7070/api/project");
-
-//       return {
-//         ...state,
-//         favourites: pokemonFromFavourite
-//         ? [
-//           ...state.favourites.filter(
-//             (pokemon) => pokemon.id !== pokemonFromFavourite.id
-//             ),
-//           ]
-//           : [...state.favourites, action.payload],
-//         }}
-
 const projectReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case ADD_NEW_PROJECT:

@@ -11,7 +11,8 @@ import ProjectPage from "./pages/projectPage";
 import SavedProjectsPage from "./pages/savedProjectsPage";
 import PhoneLogin from "./components/auth/PhoneLogin";
 import Register from "./components/auth/Register";
-
+import "tachyons";
+// import Tachyons from "./components/auth/Techo";
 const App = ({ currentUser }) => {
   // const [cookies, setCookie] = useCookies(["userToken"]);
   // const [isUserSigned, setisUserSigned] = useState(false);
@@ -30,6 +31,7 @@ const App = ({ currentUser }) => {
   return (
     <>
       <Header />
+
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/projects" element={<ProjectPage />} />
@@ -42,6 +44,7 @@ const App = ({ currentUser }) => {
         <Route path="/phoneLogin" element={<PhoneLogin />} />
         <Route path="/register" element={<Register />} />
       </Routes>
+      {/* <Tachyons /> */}
     </>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 // import axios from "axios";
 import { toggleSavedProject } from "../../redux/project/project.actions";
@@ -6,15 +6,22 @@ const ProjectCard = (project) => {
   const { title, description, catagory, price, imageUrl } = project;
   // const [projectId, setProjectId] = useState(null);
   const [like, setLike] = useState(false);
+  const [favourites, setFavourites] = useState([]);
+
+  // useEffect(() => {
+  //   console.log(favourites);
+  // }, [favourites]);
+
+  //
   return (
     <div className="card">
-      <div className="image">
+      <div className=" imgbox">
         <img src={imageUrl} alt="profile" />
       </div>
-      <div className="content">
+      <div className="">
         <div className="header">{title}</div>
         <div className="meta">{catagory}</div>
-        <div className="description">{description}</div>
+        <div className="">{description}</div>
       </div>
       <div className="extra content">
         <span className="right floated">Public</span>
@@ -26,10 +33,19 @@ const ProjectCard = (project) => {
       >
         <i className="heart icon"></i> Like
       </div>
-      <button className="ui blue button" onClick={""}>
+      <button
+        className="ui blue button"
+        // onClick={
+        //   project
+        //     ? project.map((item) => {
+        //         return setFavourites(item, ...favourites);
+        //       })
+        //     : console.log("error")
+        // }
+      >
         ADD
       </button>
-      {/* {console.log({ project._id })} */}
+      {console.log(project)}
     </div>
   );
 };
