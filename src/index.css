@@ -8,7 +8,7 @@
 }
 body {
   background: linear-gradient(89deg, #ff5edf 0%, #04c8de 100%);
-  font-family: "Courier New", Courier, monospace;
+  /* font-family: "Courier New", Courier, monospace; */
 }
 .boxing {
   border: 2px solid black;

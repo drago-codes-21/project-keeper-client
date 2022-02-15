@@ -5,7 +5,7 @@ import axios from "axios";
 import { useCookies } from "react-cookie";
 import { setCurrentUser } from "../../redux/user/user.actions";
 import { connect } from "react-redux";
-import { FcGoogle } from "react-icons/fc";
+// import { FcGoogle } from "react-icons/fc";
 const GoogleLogin = ({ currentUser, setCurrentUser }) => {
   const [cookies, setCookie] = useCookies(["userToken"]);
 

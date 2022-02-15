@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import Dropdown from "../dropdown/Dropdown";
 const Header = ({ currentUser }) => {
   return (
-    <div className="ui inverted menu">
+    <div className="ui inverted menu mb-0">
       <Link to="/" className="item">
         <h1>Project keeper</h1>
       </Link>
@@ -14,7 +14,7 @@ const Header = ({ currentUser }) => {
           <Link to="/projects" className="item">
             Projects
           </Link>
-          <div className="ms-auto">
+          <div className="ms-auto mt-3 me-3">
             <Dropdown />
           </div>
         </>

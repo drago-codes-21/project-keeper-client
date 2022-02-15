@@ -2,7 +2,7 @@ import React from "react";
 import ProjectCard from "./project/ProjectCard";
 const SampleData = () => {
   return (
-    <div className="wrapper">
+    <div className="row g-4">
       <ProjectCard
         key={112}
         title={"React js project about posts"}
