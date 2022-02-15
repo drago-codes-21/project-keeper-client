@@ -1,17 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { CgProfile } from "react-icons/cg";
+// import { CgProfile } from "react-icons/cg";
 const UserNotLogged = () => {
   return (
     <div className="dropdown">
       <button
-        className="ui blue button dropdown-toggle"
+        className="btn btn-primary dropdown-toggle"
         type="button"
         id="dropdownMenuButton1"
         data-bs-toggle="dropdown"
         aria-expanded="false"
       >
-        <CgProfile />
+        {/* <CgProfile /> */}
         Profile
       </button>
       <ul

@@ -7,7 +7,7 @@ const HomePage = ({ currentUser }) => {
   return (
     <div>
       {currentUser ? (
-        <div className="ui container">
+        <div className="container">
           <h1 className="ui header">
             Here are some best projects on our website
           </h1>

@@ -21,6 +21,7 @@ const ProjectForm = ({
   const [imageUrl, setImageUrl] = useState("");
   const [postData, setPostData] = useState(null);
   const [Id, setId] = useState("");
+  const [ favourites, setFavourites ] = useState([]);
 
   // const [proj, setProj] = useState("");
   const server = "http://localhost:7070/api/project/new";
@@ -33,6 +34,13 @@ const ProjectForm = ({
   //   );
   //   console.log(response);
   // };
+
+  const settingFavPro = (payload) => {
+    console.log("in fun")
+    let fav = favourites;
+    fav.push(payload);
+    setFavourites(fav);
+  }
 
   const getAllProductsHandler = async (e) => {
     e.preventDefault();
@@ -82,7 +90,7 @@ const ProjectForm = ({
   }, [projectData, getAllProjects]);
 
   return (
-    <div className="ui container">
+    <div className="container">
       <form onSubmit={handleSubmit}>
         <div className="ui form">
           <div className="form-group">
@@ -146,7 +154,7 @@ const ProjectForm = ({
             Get All Public Projects
           </button>
 
-          <div className="ui link cards">
+          <div className="row g-4 gx-4">
             {currentUser && postData
               ? postData.map((item) => {
                   return (
@@ -157,11 +165,14 @@ const ProjectForm = ({
                       price={item.price}
                       catagory={item.catagory}
                       imageUrl={item.imageUrl}
+                      settingFavPro={settingFavPro}
                     />
                   );
                 })
               : null}
           </div>
+          <h1>HEHEH</h1>
+          <div className="btn btn-primary" onClick={() => console.log(favourites)}>show</div>
         </div>
       </form>
     </div>
