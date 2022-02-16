@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-// import { CgProfile } from "react-icons/cg";
 const UserNotLogged = () => {
   return (
     <div className="dropdown">
@@ -11,7 +10,6 @@ const UserNotLogged = () => {
         data-bs-toggle="dropdown"
         aria-expanded="false"
       >
-        {/* <CgProfile /> */}
         Profile
       </button>
       <ul

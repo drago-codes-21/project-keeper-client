@@ -2,13 +2,10 @@ import React, { useState } from "react";
 import { authentication } from "../../firebase.js";
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 import { setCurrentUser } from "../../redux/user/user.actions";
-import { useCookies } from "react-cookie";
 import axios from "axios";
 import { connect } from "react-redux";
 
 const PhoneLogin = ({ setCurrentUser, currentUser }) => {
-  const [cookies, setCookie] = useCookies(["userToken"]);
-
   const [num, setnum] = useState();
   const [confirmation, setconfirmation] = useState();
 
@@ -17,9 +14,7 @@ const PhoneLogin = ({ setCurrentUser, currentUser }) => {
       "recaptcha-container",
       {
         size: "invisible",
-        callback: (response) => {
-          // reCAPTCHA solved, allow signInWithPhoneNumber.
-        },
+        callback: (response) => {},
       },
       authentication
     );
@@ -81,60 +76,62 @@ const PhoneLogin = ({ setCurrentUser, currentUser }) => {
   };
 
   return (
-    <div className="ui container segments">
-      <div className="ui form">
-        <div className="ui feild">
-          <label htmlFor="phoneNum" className="ui pointing blue basic label">
-            Phone num
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="phoneNum"
-            aria-describedby="emailHelp"
-            value={num}
-            placeholder="Phone Number"
-            onChange={(e) => {
-              setnum(e.target.value);
-            }}
-          />
-          <div id="phonerHelp" className="form-text">
-            We'll never share your number with anyone else.
+    <article className="br3 ba b--black-10 mv4 w-100 w-50-m w-25-l mw6 shadow-5 center">
+      <main className="pa4 black-80">
+        <div className="measure">
+          <div className="ui feild">
+            <label htmlFor="phoneNum" className="ui pointing blue basic label">
+              Phone Number
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              id="phoneNum"
+              aria-describedby="emailHelp"
+              value={num}
+              placeholder="Phone Number"
+              onChange={(e) => {
+                setnum(e.target.value);
+              }}
+            />
+            <div id="phonerHelp" className="form-text">
+              We'll never share your number with anyone else.
+            </div>
+          </div>
+          <div className="ui blue button" onClick={() => phonelog()}>
+            Submit
+          </div>
+
+          <div id="recaptcha-container"></div>
+          <div className="mb-3">
+            <label
+              htmlFor="confirmation"
+              className="ui pointing blue basic label"
+            >
+              confirmation code
+            </label>
+            <input
+              type="number"
+              className="form-control"
+              id="confirmation"
+              placeholder="Otp code"
+              value={confirmation}
+              onChange={(e) => {
+                setconfirmation(e.target.value);
+              }}
+              aria-describedby="emailHelp"
+            />
+          </div>
+          <div className="ui blue button" onClick={() => ValidateOtp()}>
+            confirmation
+          </div>
+
+          <div className="ui red button" onClick={() => checkCookies()}>
+            Check cookies
           </div>
         </div>
-        <div className="ui blue button" onClick={() => phonelog()}>
-          Submit
-        </div>
-
-        <div id="recaptcha-container"></div>
-        <div className="mb-3">
-          <label
-            htmlFor="confirmation"
-            className="ui pointing blue basic label"
-          >
-            confirmation code
-          </label>
-          <input
-            type="number"
-            className="form-control"
-            id="confirmation"
-            placeholder="Otp code"
-            value={confirmation}
-            onChange={(e) => {
-              setconfirmation(e.target.value);
-            }}
-            aria-describedby="emailHelp"
-          />
-        </div>
-        <div className="ui blue button" onClick={() => ValidateOtp()}>
-          confirmation
-        </div>
-
-        <div className="ui red button" onClick={() => checkCookies()}>
-          Check cookies
-        </div>
-      </div>
-    </div>
+      </main>
+    </article>
   );
 };
 const mapStateToProps = ({ user }) => ({

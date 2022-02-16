@@ -21,36 +21,21 @@ const ProjectForm = ({
   const [imageUrl, setImageUrl] = useState("");
   const [postData, setPostData] = useState(null);
   const [Id, setId] = useState("");
-  const [ favourites, setFavourites ] = useState([]);
-
-  // const [proj, setProj] = useState("");
+  const [favourites, setFavourites] = useState([]);
   const server = "http://localhost:7070/api/project/new";
   const server2 = "http://localhost:7070/api/project/all/projects";
-
-  // const addToFavourites = async (e) => {
-  //   e.preventDefault();
-  //   const response = await axios.get(
-  //     `http://localhost:7070/api/project/${postData._id}`
-  //   );
-  //   console.log(response);
-  // };
-
   const settingFavPro = (payload) => {
-    console.log("in fun")
+    console.log("in fun");
     let fav = favourites;
     fav.push(payload);
     setFavourites(fav);
-  }
+  };
 
   const getAllProductsHandler = async (e) => {
     e.preventDefault();
     const response = await axios.get(server2);
     const data = response.data;
-    // console.log(data);
     setPostData(data);
-    // const { item } = { ...data };
-    // setImageUrl(data.imageUrl);
-    data.map((item) => {});
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -73,10 +58,15 @@ const ProjectForm = ({
     if (response.statusText === "OK") {
       addNewProject(data);
     }
+    if (data) {
+      setTitle("");
+      setImageUrl("");
+      setDescription("");
+      setPrice("");
+      setCatagory("");
+    }
   };
-  // useEffect(() => {
-  //   addNewProject();
-  // }, [addNewProject]);
+
   useEffect(() => {
     if (currentUser._id) {
       setId(currentUser._id);
@@ -151,7 +141,7 @@ const ProjectForm = ({
             Submit
           </button>
           <button className="ui red button " onClick={getAllProductsHandler}>
-            Get All Public Projects
+            Get All Projects
           </button>
 
           <div className="row g-4 gx-4">
@@ -171,8 +161,6 @@ const ProjectForm = ({
                 })
               : null}
           </div>
-          <h1>HEHEH</h1>
-          <div className="btn btn-primary" onClick={() => console.log(favourites)}>show</div>
         </div>
       </form>
     </div>

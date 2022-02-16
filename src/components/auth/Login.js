@@ -3,16 +3,15 @@ import axios from "axios";
 import { connect } from "react-redux";
 import { setCurrentUser } from "../../redux/user/user.actions";
 
-const Login = ({ currentUser, setCurrentUser }) => {
+const Login = ({ setCurrentUser }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const server = "http://localhost:7070/api/auth/login";
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        server,
+        process.env.REACT_APP_LOGIN_SERVER,
         JSON.stringify({ email, password }),
         {
           headers: { "Content-Type": "application/json" },
@@ -20,8 +19,6 @@ const Login = ({ currentUser, setCurrentUser }) => {
       );
       const data = response.data;
       console.log(response);
-      // console.log(response.data);
-      // console.log({ ...data });
       if (response.statusText === "OK") {
         setCurrentUser({ ...data });
       }
@@ -29,15 +26,6 @@ const Login = ({ currentUser, setCurrentUser }) => {
       setError(error);
     }
   };
-
-  // useEffect(() => {
-  //   if (currentUser) {
-  //     console.log(currentUser._id);
-  //   } else {
-  //     console.log("err");
-  //   }
-  // }, [currentUser]);
-
   return (
     <article className="br3 ba b--black-10 mv4 w-100 w-50-m w-25-l mw6 shadow-5 center">
       <main className="pa4 black-80">
@@ -92,8 +80,6 @@ const Login = ({ currentUser, setCurrentUser }) => {
                   Login
                 </button>
               </div>
-
-              {/* {currentUser ? <div>yess</div> : <div>Nooo</div>} */}
             </fieldset>
           </form>
         </div>
@@ -102,11 +88,8 @@ const Login = ({ currentUser, setCurrentUser }) => {
   );
 };
 
-const mapStateToProps = ({ user }) => ({
-  currentUser: user.currentUser,
-});
 const mapDispatchToProps = (dispatch) => ({
   setCurrentUser: (user) => dispatch(setCurrentUser(user)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(null, mapDispatchToProps)(Login);

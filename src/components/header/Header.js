@@ -20,9 +20,6 @@ const Header = ({ currentUser }) => {
         </>
       ) : (
         <>
-          {/* <Link className="item" to="/auth">
-            Login
-          </Link>{" "} */}
           <Link className="item" to="/register">
             Register
           </Link>

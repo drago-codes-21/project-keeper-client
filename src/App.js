@@ -1,37 +1,34 @@
-import Header from "./components/header/Header";
+import { useEffect, useState } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
-// import { useEffect, useState } from "react";
-// import { useCookies } from "react-cookie";
-import UserProfile from "./components/project/UserProfile";
 import { connect } from "react-redux";
+import { useCookies } from "react-cookie";
+import Header from "./components/header/Header";
+import UserProfile from "./components/profile/UserProfile";
 import AuthenticationPage from "./pages/authenticationPage";
 import HomePage from "./pages/homePage";
 import ProjectPage from "./pages/projectPage";
-// import Register from "./components/auth/Register";
 import SavedProjectsPage from "./pages/savedProjectsPage";
 import PhoneLogin from "./components/auth/PhoneLogin";
 import Register from "./components/auth/Register";
-import "tachyons";
-// import Tachyons from "./components/auth/Techo";
+
 const App = ({ currentUser }) => {
-  // const [cookies, setCookie] = useCookies(["userToken"]);
-  // const [isUserSigned, setisUserSigned] = useState(false);
+  const [cookies, setCookie] = useCookies(["userToken"]);
+  const [isUserSigned, setisUserSigned] = useState(false);
 
-  // useEffect(() => {
-  //   const fun = () => {
-  //     if (cookies.userToken && cookies.userToken !== "") {
-  //       console.log("cookies", cookies);
-  //       setisUserSigned(true);
-  //     }
-  //   };
+  useEffect(() => {
+    const fun = () => {
+      if (cookies.userToken && cookies.userToken !== "") {
+        console.log("cookies", cookies);
+        setisUserSigned(true);
+      }
+    };
 
-  //   fun();
-  // }, [cookies]);
+    fun();
+  }, [cookies]);
 
   return (
-    <>
+    <div>
       <Header />
-
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/projects" element={<ProjectPage />} />
@@ -44,8 +41,7 @@ const App = ({ currentUser }) => {
         <Route path="/phoneLogin" element={<PhoneLogin />} />
         <Route path="/register" element={<Register />} />
       </Routes>
-      {/* <Tachyons /> */}
-    </>
+    </div>
   );
 };
 const mapStateToProps = ({ user }) => ({

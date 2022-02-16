@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-// import { CgProfile } from "react-icons/cg";
 import { connect } from "react-redux";
 import { setCurrentUser } from "../../redux/user/user.actions";
 const UserLogged = ({ setCurrentUser }) => {
@@ -13,7 +12,6 @@ const UserLogged = ({ setCurrentUser }) => {
         data-bs-toggle="dropdown"
         aria-expanded="false"
       >
-        {/* <CgProfile /> */}
         Profile
       </button>
       <ul
